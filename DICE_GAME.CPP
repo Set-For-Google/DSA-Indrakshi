@@ -2,28 +2,31 @@
 #include <ctime>
 #include <cstdlib>
 
-void diceRoll() {
-    int roll1, roll2;
+void roll_dice(int& die1, int& die2) {
+    die1 = rand() % 6 + 1;
+    die2 = rand() % 6 + 1;
+}
 
-    roll1 = (rand() % 6) + 1;
-    roll2 = (rand() % 6) + 1;
+void player_turn(int player) {
+    std::cout << "Player " << player << "'s turn:" << std::endl;
+    std::cout << "Rolling the dice..." << std::endl;
 
-    std::cout << "You rolled: " << roll1 << " and " << roll2 << std::endl;
+    int die1, die2;
+    roll_dice(die1, die2);
 
-    if (roll1 == roll2) {
-        std::cout << "Congratulations! You rolled a double." << std::endl;
-    } else {
-        std::cout << "Better luck next time!" << std::endl;
-    }
+    std::cout << "Die 1: " << die1 << ", Die 2: " << die2 << std::endl;
 }
 
 int main() {
     srand(time(0));
 
-    std::cout << "Welcome to the dice game!" << std::endl;
-    std::cout << "Rolling the dice..." << std::endl;
+    int num_players;
+    std::cout << "Enter the number of players: ";
+    std::cin >> num_players;
 
-    diceRoll();
+    for (int i = 1; i <= num_players; i++) {
+        player_turn(i);
+    }
 
     return 0;
 }
